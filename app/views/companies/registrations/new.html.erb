@@ -1,0 +1,77 @@
+<div class="pink-container">
+
+
+
+<div class="form-container-users">
+
+<div class="form-group">
+  <%= image_tag("fiestafy.png", {size: '100 x 50'})  %>
+
+<h2>Companies</h2>
+
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+  <%= devise_error_messages! %>
+
+  <div class="field">
+    <%= f.label :company_name %><br />
+    <%= f.text_field :company_name, autofocus: true, autocomplete: "Company Name" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :address %><br />
+    <%= f.text_field :address, autofocus: true, autocomplete: "Address" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :phone_number %><br />
+    <%= f.text_field :phone_number, autofocus: true, autocomplete: "Phone Number" %>
+  </div>
+
+  <div class="field">
+    <%= f.label "Service Distance (miles)" %><br />
+    <%= f.number_field :service_distance, autofocus: true, autocomplete: "Service Distance" %>
+  </div>
+
+
+
+  <div class="">
+    <%= f.label :category %><br />
+    <%= f.select :category, options_for_select(Company.categories) %>
+  </div>
+
+
+  <div class="field">
+    <%= f.label :email %><br />
+    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :password %>
+    <% if @minimum_password_length %>
+    <em>(<%= @minimum_password_length %> characters minimum)</em>
+    <% end %><br />
+    <%= f.password_field :password, autocomplete: "off" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :password_confirmation %><br />
+    <%= f.password_field :password_confirmation, autocomplete: "off" %>
+  </div>
+
+  <div class='field'>
+    <%= f.label "Company Logo"%>
+    <%= f.file_field :avatar%>
+  </div>
+
+<br>
+  <div class="actions">
+    <%= f.submit "Sign up" %>
+  </div>
+<% end %>
+
+<hr>
+
+<%= render "companies/shared/links" %>
+</div>
+</div>
+</div>

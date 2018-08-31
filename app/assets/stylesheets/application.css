@@ -1,0 +1,239 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ *= require simple_calendar
+ */
+
+* {
+  color: rgba(0,0,0,.5)
+}
+
+.pink-container {
+  background-color: #D81A2D;
+  width: 100%;
+  height: 1000px;
+  padding: 10px;
+}
+
+#navlogo{
+  width: 70px;
+}
+
+ #canvas {
+
+  width: 80%;
+  position: absolute;
+  z-index: -1;
+  margin: 0 auto;
+ }
+
+ #item{
+   color: #e9488b;
+   border-bottom: 1px solid  #F0F0F0;
+
+ }
+
+.form-container {
+  width: 90%;
+
+  margin: 0 auto;
+  border-radius: 5px;
+  border: 1px solid #F0F0F0;
+  padding: 15px;
+  bottom: 20px;
+  margin-top: 70px;
+  box-shadow: 10px 10px 10px #F0F0F0;
+
+}
+
+
+.form-container-users {
+
+  width: 50%;
+  margin: 0 auto;
+  border-radius: 5px;
+  border: 1px solid #F0F0F0;
+  padding: 15px;
+  bottom: 20px;
+  margin-top: 70px;
+  box-shadow: 10px 10px 10px #F0F0F0;
+  background-color: white;
+
+}
+
+/* navbar */
+
+.navbar-brand {
+  padding-left: 150px;
+}
+
+.container-fluid {
+  padding: 0px 150px;
+  display: flex;
+  background: linear-gradient(#F0F0F0, white);
+
+}
+
+.btn{
+  background-color: white;
+  border: 0;
+  color: grey;
+}
+
+
+/* main */
+
+#thumbnail {
+  max-height: 100px;
+  max-width: 100px;
+  border: .5px solid grey;
+  border-radius: 10px 25px;
+}
+
+.col-md{
+  margin: 10px;
+  height: 420px;
+}
+
+.col-md img{
+  min-width: 100%;
+  max-width: 300px;
+  max-height: 300px;
+  border-radius: 3px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+/* flashcard */
+
+.flashcard-holder{
+  margin: 0px 150px;
+}
+.row {
+  margin: 0px 150px;
+  height: 520px;
+}
+
+.col-sm{
+  margin: 10px;
+  height: 320px;
+}
+
+.col-sm img{
+  min-width: 100%;
+  max-width: 250px;
+  max-height: 250px;
+  border-radius: 3px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+/* carousel */
+
+.carousel-inner{
+  max-height: 400px;
+}
+
+.carousel-item img{
+  margin: auto;
+  vertical-align: middle;
+  min-height: 400px;
+}
+
+.carousel-inner-item{
+  max-height: 350px;
+}
+
+.carousel-inner-item img{
+  margin: auto;
+  vertical-align: middle;
+  min-height: 350px;
+}
+
+/* forms */
+
+.form-group {
+  width: 100%;
+  text-align: center;
+}
+
+.actions{
+}
+
+/* buttons */
+h3{
+  color: #585858;
+}
+
+input {
+    border: none;
+    border-bottom: 1px solid #F0F0F0;
+}
+
+input[type="submit"] {
+  background-color: #EC008C	;
+    color: white;
+    font-weight: lighter;
+    border-bottom: none;
+    border-radius: 5px;
+      box-shadow: 10px 10px 10px #F0F0F0;
+}
+
+input[type="submit"]:hover {
+  background-color: #EC008C;
+  opacity: 0.9;
+    color: #F8F8F8	;
+}
+
+input[type="file"] {
+}
+
+
+button {
+  background-color: #EC008C	;
+    color: white;
+    border-bottom: none;
+    border-radius: 5px;
+    font-weight: lighter;
+}
+
+button:hover {
+  background-color: #EC008C;
+  opacity: 0.9;
+    color: #F8F8F8	;
+}
+
+button a {
+  color: white;
+  font-weight: lighter;
+}
+
+
+input[type="search"]{
+  border: none;
+  border-bottom: 1px solid #F0F0F0;
+}
+
+a {
+  color: #585858;
+}
+
+a:hover {
+  color: #EC008C;
+  text-decoration: none;
+}

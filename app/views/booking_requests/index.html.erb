@@ -1,0 +1,32 @@
+
+
+
+<div class="form-container">
+
+
+
+<% if current_user %>
+  <div>
+    <h3><%="My Events"%></h3>
+    <button><%= link_to "New Event", new_booking_request_path %></button>
+  </div>
+
+  <table class= "table">
+    <tr>
+      <th>Event Id</th>
+      <th>Venue</th>
+      <th>Date</th>
+    </tr>
+    <% current_user.booking_requests.each do |event| %>
+    <tr>
+      <td><%= link_to "#{event.id}", booking_request_path(event) %></td>
+      <td><%= event.venue_name%></td>
+      <td><%= event.start_time%></td>
+    </tr>
+    <%end %>
+  </table>
+<%end %>
+
+
+
+</div>

@@ -1,0 +1,70 @@
+<div class="row">
+          <div >
+            <% if @company.avatar.attached? %>
+              <%= image_tag @company.avatar.variant(resize: "300x300") %>
+            <% else %>
+              <%= image_tag("party-item.png", {size: '300'})  %>
+            <% end %>
+            <h3><%= @company.company_name %></h3>
+            <%= @company.category.upcase %>
+            </br>
+            <%= @company.address %>
+            </br>
+            <%= "Service up to #{@company.service_distance} miles" %>
+          </div>
+
+          <div class= "col-md">
+          <% if @company.images.attached? %>
+          <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+              <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+              <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+              <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+            </ol>
+            <div class="carousel-inner">
+              <% @company.images.each_with_index do |image, i| %>
+              <%= content_tag :div, class: ["carousel-item", i == 0 ? 'active' : ''] do %>
+                  <%= image_tag image.variant(resize: "400x400"), class: 'd-block w-20'%>
+              <%end %>
+              <% end %>
+            </div>
+            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="sr-only">Next</span>
+            </a>
+          </div>
+          <% end %>
+          </div>
+</div>
+
+
+
+
+<% if @company.inventory_items.any? %>
+  <div class= 'flashcard-holder'>
+    <h4><%="#{@company.company_name.upcase} 'S ITEMS"%></h4>
+      <div class="row">
+        <% @company.inventory_items.each do |item| %>
+          <div class="col-sm">
+            <% if item.images.attached? %>
+
+
+
+                <%= image_tag item.images.first.variant(resize: "400x400")%>
+
+
+              <% else %>
+              <%= image_tag("party-item.png", {size: '300'})  %>
+            <% end %>
+            <%= item.subcategory.upcase %>
+            <h5><%= link_to "#{item.name}", item %></h5>
+            <%= "$#{item.price} daily | #{item.quantity} available"%>
+          </div>
+        <% end %>
+    </div>
+  </div>
+<% end %>

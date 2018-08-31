@@ -1,0 +1,63 @@
+  <div class="row">
+    <div class="col-md">
+        <% if @inventory_item.images.attached? %>
+            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+              <ol class="carousel-indicators">
+                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+              </ol>
+              <div class="carousel-inner-item">
+                <% @inventory_item.images.each_with_index do |image, i| %>
+                <%= content_tag :div, class: ["carousel-item", i == 0 ? 'active' : ''] do %>
+                    <%= image_tag image.variant(resize: "400x400"), class: 'd-block w-20'%>
+                <%end %>
+                <% end %>
+              </div>
+              <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+              </a>
+              <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+              </a>
+            </div>
+
+      <% else %>
+          <%= image_tag("party-item.png", {size: '300'})  %>
+      <% end %>
+      <h6><%= "#{@inventory_item.category.upcase} • #{@inventory_item.subcategory.upcase}"%></h6>
+      <h3><%= @inventory_item.name %></h3>
+      <p><%= "$#{@inventory_item.price} daily | #{@inventory_item.quantity} available"%></p>
+      <p><%= @inventory_item.description%></p>
+      <% if current_company %>
+        <button><%= link_to 'Edit', edit_inventory_item_path %></button>
+      <%end %>
+    </div>
+    <div class="col-md">
+      <%= month_calendar events: @inventory_item.booking_requests do |date, bookings| %>
+          <%= date.day %>
+          <% bookings.each do |booking| %>
+            <% if booking.item_rentals.any?{|x| x.status == 'approved'} %>
+                <p id= "booked">Unavailable</p>
+            <% end %>
+          <% end %>
+          <% if current_user %>
+            <% current_user.booking_requests.each do |event|  %>
+                <% if event.start_time.to_s.include?(date.to_s) %>
+                  <p>My event: <strong><%= event.venue_name %></strong></p>
+                  <%= form_with(model: @item_rental, local: true) do |form| %>
+                    <div class="field">
+                      <%= form.hidden_field :booking_request_id, :value => event.id.to_i  %>
+                      <%= form.hidden_field :inventory_item_id, :value => @inventory_item.id.to_i  %>
+                    <div class="actions">
+                      <%= form.submit %>
+                    </div>
+                  <%end %>
+              <%end %>
+            <%end %>
+          <% end %>
+      <% end %>
+    </div>
+  </div>

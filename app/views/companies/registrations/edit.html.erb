@@ -1,0 +1,82 @@
+
+<div class="form-container">
+
+<div class="form-group">
+<h3>Edit <%= resource_name.to_s.humanize %></h3>
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+<%= devise_error_messages! %>
+  <div class="field">
+    <%= f.label :email %><br />
+    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+  </div>
+  <div class="field">
+    <%= f.label :company_name %><br />
+    <%= f.text_field :company_name, autofocus: true, autocomplete: "Company Name" %>
+  </div>
+  <div class="field">
+    <%= f.label :address %><br />
+    <%= f.text_field :address, autofocus: true, autocomplete: "Address" %>
+  </div>
+  <div class="field">
+    <%= f.label :phone_number %><br />
+    <%= f.text_field :phone_number, autofocus: true, autocomplete: "Phone Number" %>
+  </div>
+  <div class="field">
+    <%= f.label :service_distance %><br />
+    <%= f.number_field :service_distance, autofocus: true, autocomplete: "Service Distance" %>
+  </div>
+  <div class="">
+    <%= f.label :category %><br />
+    <%= f.select :category, options_for_select(Company.categories) %>
+  </div>
+  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+  <% end %>
+  <div class="field">
+  <%= f.label :password %> <i></i><br />
+    <%= f.password_field :password, autocomplete: "off" %>
+    <% if @minimum_password_length %>
+      <br />
+      <em><%= @minimum_password_length %> characters minimum</em>
+  <% end %>
+  </div>
+  <div class="field">
+    <%= f.label :password_confirmation %><br />
+    <%= f.password_field :password_confirmation, autocomplete: "off" %>
+  </div>
+  <div class="field">
+    <%= f.label :current_password %> <i>Required</i><br />
+    <%= f.password_field :current_password, autocomplete: "off" %>
+  </div>
+  <br>
+  <% if current_company.avatar.attached? %>
+    <%= image_tag current_company.avatar.variant(resize: "100x100") %>
+  <% else %>
+    <%= image_tag("party-item.png", {size: '300'})  %>
+  <% end %>
+  <div class='field'>
+    <%= f.file_field :avatar%>
+  </div>
+  <br>
+  <h4>Images</h4>
+  <% if current_company.images.attached? %>
+    <% current_company.images.each do |image| %>
+      <%= image_tag image.variant(resize: "100x100")%>
+      <%= link_to "Delete", company_image_path(current_company, image), method: :delete %>
+    <%end %>
+    <% else %>
+      <%= image_tag("party-item.png", {size: '300'})  %>
+  <% end %>
+  <div class='field'>
+    <%= f.file_field :images, multiple: true%>
+  </div>
+  <br>
+  <div class="actions">
+    <%= f.submit "Update" %>
+  </div>
+<% end %>
+<hr>
+<%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %>
+</div>
+
+</div>

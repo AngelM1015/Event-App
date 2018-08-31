@@ -1,0 +1,74 @@
+<% if current_company  %>
+        <% if current_company.inventory_items.any?{|x| x.item_rentals.any?{ |y| y.status=='pending'}}%>
+
+            <div class="alert alert-info alert-dismissible fade show" role="alert">
+          <strong>You have pending requests.</strong> Go review them.
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+            </div>
+        <%end %>
+
+<% end %>
+
+
+
+<div class="row">
+
+  <div >
+    <p><%= "Welcome #{current_company.company_name}"%></p>
+    <% if current_company.avatar.attached? %>
+        <%= image_tag current_company.avatar.variant(resize: "300x300") %>
+
+    <% else %>
+      <%= image_tag("party-avatar.png", {size: '100', class: 'img-thumbnail'})  %>
+    <% end %>
+
+  </div>
+  <div class= "col-md">
+  <% if current_company.images.attached? %>
+    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+      <ol class="carousel-indicators">
+        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+      </ol>
+      <div class="carousel-inner">
+        <% current_company.images.each_with_index do |image, i| %>
+        <%= content_tag :div, class: ["carousel-item", i == 0 ? 'active' : ''] do %>
+            <%= image_tag image.variant(resize: "400x400"), class: 'd-block w-20'%>
+        <%end %>
+        <% end %>
+      </div>
+      <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
+    </div>
+    <% end %>
+  </div>
+</div>
+
+<% if @inventory_items.any? %>
+  <div class= 'flashcard-holder'>
+    <h3 id= "item">Inventory</h3>
+        
+      <div class="row">
+      <% current_company.inventory_items.each do |item| %>
+        <div class="col-sm">
+          <% if item.images.attached? %>
+            <%= image_tag item.images.first.variant(resize: "400x400")%>
+          <% else %>
+              <%= image_tag("party-item.png", {size: '300'})  %>
+          <% end %>
+          <h5 class= "flashcard"><%= link_to "#{item.name}", item %></h5>
+          <p><%= item.subcategory.upcase %></p>
+          <p><%= "$#{item.price} daily | #{item.quantity} available"%></p>
+          </div>
+        <% end %>
+      </div>
+  </div>
+<% end %>

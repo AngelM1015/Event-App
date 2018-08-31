@@ -1,0 +1,13 @@
+<div class="flashcard-holder">
+  <div class="row">
+    <div class="flashcard">
+      <% if company.avatar.attached? %>
+        <%= image_tag company.avatar.variant(resize: "100x100") %>
+      <% else %>
+        <%= image_tag("party-item.png", {size: '300'})  %>
+      <%end%>
+      <p><%= company.category.upcase %></p>
+      <h5><%= link_to "#{company.company_name.upcase}", company %></h5>
+    </div>
+  </div>
+</div>

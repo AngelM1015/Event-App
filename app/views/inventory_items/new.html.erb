@@ -1,0 +1,46 @@
+<div class="form-container-users">
+<div class= "form-group">
+  <h3>New Item</h3>
+  <%= form_with(model: @inventory_item, local: true) do |form| %>
+    <% if @inventory_item.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@inventory_item.errors.count, "error") %> prohibited this picture from being saved:</h2>
+        <ul>
+          <% @inventory_item.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+      </ul>
+      </div>
+    <% end %>
+    <div class="field">
+      <%= form.label :name %>
+      <%= form.text_field :name %>
+    </div>
+    <div class="field">
+      <%= form.label :quantity %>
+      <%= form.number_field :quantity %>
+    </div>
+    <div class="field">
+      <%= form.label :price %>
+      <%= form.number_field :price %>
+    </div>
+    <div class="field">
+      <%= form.label :description %>
+      <%= form.text_field :description %>
+    </div>
+    <div class="">
+      <%= form.select :subcategory, grouped_options_for_select(InventoryItem.categories) %>
+    </div>
+    <hr>
+    <h4>Images</h4>
+    <div class='field'>
+      <%= form.label "Gallery"%>
+      <%= form.file_field :images, multiple: true%>
+    </div>
+    <hr>
+    <div class="actions">
+      <%= form.submit %>
+    </div>
+  <% end %>
+</div>
+</div>

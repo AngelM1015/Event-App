@@ -1,0 +1,30 @@
+<div>
+  <h3><%="Request # #{@item_rental.id}"%></h3>
+</div>
+
+<table class= "table">
+  <tr>
+    <th>Item ID</th>
+    <th>Item Name</th>
+    <th>Event Name</th>
+    <th>Date</th>
+    <th>Status</th>
+  </tr>
+  <tr>
+    <td><%= @item_rental.inventory_item.id %></td>
+    <td><%= @item_rental.inventory_item.name %></td>
+    <td><%= @item_rental.booking_request.venue_name%></td>
+    <td><%= @item_rental.booking_request.start_time %></td>
+    <td>
+      <%= form_with(model: @item_rental, local: true) do |form| %>
+        <span class="field">
+          <%= form.label ' ' %>
+          <%= form.select :status, ItemRental.statuses.keys.to_a  %>
+        </span>
+        <span class="actions">
+          <%= form.submit "✔" %>
+        </span>
+      <%end %>
+    </td>
+  </tr>
+</table>
